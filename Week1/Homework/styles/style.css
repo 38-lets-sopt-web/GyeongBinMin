@@ -1,3 +1,4 @@
+/* header */
 header {
     display: flex;
     position: fixed;
@@ -6,6 +7,7 @@ header {
     padding: 2rem;
     width: 100%;
     background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
     z-index: 10;
 }
 
@@ -15,7 +17,6 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     gap: 0.4rem;
 }
 
@@ -24,24 +25,75 @@ header {
     height: 5rem;
     border-radius: 50px;
     object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header_profile img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .header_main h1 {
     font-size: 2rem;
-    line-height: 1.2;
+    color: var(--color-text-muted);
 }
 
 .header_main p {
-    color: var(--color-secondary);
-    font-size: 1.4rem;
+    color: var(--color-text);
+    font-size: 1.2rem;
     margin-top: 0.5rem;
 }
 
 .header_github {
     padding: 0.8rem 1.2rem;
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-surface);
     border-radius: 50px;
     font-size: 2rem;
-    color: var(--color-secondary);
-    line-height: 1;
+    color: var(--color-text);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.header_github:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* layout */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+     margin: 0 auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 10rem;
+    left: 2rem;
+    width: 20rem;
+    border-radius: 16px;
+    background-color: var(--color-primary);
+    padding: 2rem 1.6rem;
+}
+
+.sidebar_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.sidebar_link {
+    padding: 1.4rem 1.6rem;
+    border: none;
+    border-radius: 50px;
+    color: var(--color-text);
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.sidebar_link:hover {
+    background-color: var(--color-primary-contrast);
+    color: var(--color-text);
 }
