@@ -287,4 +287,55 @@ section h2 {
 }
 
 
+.section_to .section_title {
+    font-size: 2.4rem;
+}
+.to_card {
+    margin-top: 1.6rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.6rem;
+    display: grid;
+    gap: 1.2rem;
+}
+
+.to_item {
+    position: relative;
+    padding: 1.2rem 4.2rem;
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.to_item::before {
+    content: "📣";
+    position: absolute;
+    left: 1.2rem
+
+}
+
+.to_item.is-done::after {
+    content: "✅";
+    border: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+}
+
+.footer {
+    margin-left: 22.5rem;
+    background: var(--color-primary);
+    border-top: 1px solid var(--color-primary-contrast);
+    padding: 3rem 2rem;
+}
+.footer_text {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+}
 
