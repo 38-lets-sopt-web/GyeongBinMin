@@ -327,7 +327,6 @@ section h2 {
 }
 
 .footer {
-    margin-left: 22.5rem;
     background: var(--color-primary);
     border-top: 1px solid var(--color-primary-contrast);
     padding: 3rem 2rem;
