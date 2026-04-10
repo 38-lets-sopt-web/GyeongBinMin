@@ -122,104 +122,6 @@ section h2 {
     color: var(--color-text-muted);
 }
 
-/* interest cards */
-.interest_grid {
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
-}
-
-@media (max-width: 1200px) {
-    .interest_grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 992px) {
-    .interest_grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .interest_grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.interest_card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-primary-contrast);
-    border-radius: 16px;
-    padding: 1.6rem;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.interest_card:hover {
-    transform: translateY(-0.6rem);
-    box-shadow: 0 8px 24px var(--shadow-color);
-}
-
-.interest_thumb {
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-}
-
-.interest_thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-.interest_title {
-    margin-top: 1.2rem;
-    font-size: 1.6rem;
-    color: var(--color-text-muted);
-}
-
-.interest_actions {
-    margin-top: 1.2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.interest_btn {
-    padding: 0.9rem 1rem;
-    border-radius: 9999px;
-    font-size: 1.4rem;
-    font-weight: 800;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.interest_btn--like {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--color-primary-contrast);
-    color: var(--color-text-muted);
-}
-
-.interest_btn--hate {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--color-primary-contrast);
-    color: var(--color-text-muted);
-}
-
-.interest_btn--like:hover {
-    background: var(--color-primary-contrast);
-    color: #ffffff;
-    transform: translateY(-0.2rem);
-}
-
-.interest_btn--hate:hover {
-    background: rgba(255, 77, 77, 0.85);
-    color: #ffffff;
-    transform: translateY(-0.2rem);
-}
-
 .grid-photo {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -288,3 +190,101 @@ section h2 {
     height: 100%;
     object-fit: cover;
 }
+
+.interest_grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+    .interest_grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .interest_grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .interest_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.interest_card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary-contrast);
+    border-radius: 16px;
+    padding: 1.6rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.interest_card:hover {
+    transform: translateY(-0.6rem);
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.interest_thumb {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.interest_thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.interest_title {
+    margin-top: 1.2rem;
+    font-size: 1.6rem;
+    color: var(--color-text-muted);
+}
+
+.interest_actions {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.interest_btn {
+    padding: 0.9rem 1rem;
+    border-radius: 50px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.interest_btn--like {
+    background: var(--color-surface-60);
+    border: 1px solid var(--color-primary-contrast);
+    color: var(--color-text-muted);
+}
+
+.interest_btn--hate {
+    background: var(--color-surface-60);
+    border: 1px solid var(--color-primary-contrast);
+    color: var(--color-text-muted);
+}
+
+.interest_btn--like:hover {
+    background: var(--color-primary-contrast);
+    color: var(--color-surface);
+    transform: translateY(-0.2rem);
+}
+
+.interest_btn--hate:hover {
+    background: rgba(219, 77, 77, 0.85);
+    color: var(--color-surface);
+    transform: translateY(-0.2rem);
+}
+
+
+

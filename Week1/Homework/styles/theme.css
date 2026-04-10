@@ -10,6 +10,7 @@
   /* UI */
   --color-border: rgba(15, 23, 42, 0.18);
   --shadow-color: rgba(15, 23, 42, 0.18);
+  --color-surface-60: rgba(255, 255, 255, 0.6);
 
   /* 주요 색*/
   --color-primary: #a7f3d0;
