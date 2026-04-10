@@ -1,9 +1,17 @@
 :root {
-  /* color */
-  --color-primary: #22c55e;
-  --color-secondary: #f0fdf4;
+  /* 기본 색상 */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
 
-  --color-text: #111827;
+  /* 텍스트 */
+  --color-text: #ffffff;
+  --color-text-muted: #000000;
 
+  /* UI */
+  --color-border: rgba(15, 23, 42, 0.18);
+  --shadow-color: rgba(15, 23, 42, 0.18);
 
+  /* 주요 색*/
+  --color-primary: #a7f3d0;
+  --color-primary-contrast:rgb(80, 208, 174);
 }
