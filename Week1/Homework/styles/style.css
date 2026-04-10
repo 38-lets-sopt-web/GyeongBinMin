@@ -1,0 +1,47 @@
+header {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+    background-color: var(--color-primary);
+    z-index: 10;
+}
+
+.header_main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.4rem;
+}
+
+.header_profile img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.header_main h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.header_main p {
+    color: var(--color-secondary);
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+}
+
+.header_github {
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 50px;
+    font-size: 2rem;
+    color: var(--color-secondary);
+    line-height: 1;
+}
