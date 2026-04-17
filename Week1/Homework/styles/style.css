@@ -11,7 +11,7 @@ header {
     z-index: 10;
 }
 
-.header_main {
+.header-main {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -20,7 +20,7 @@ header {
     gap: 0.4rem;
 }
 
-.header_profile img {
+.header-profile img {
     width: 5rem;
     height: 5rem;
     border-radius: 50px;
@@ -29,23 +29,23 @@ header {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.header_profile img:hover {
+.header-profile img:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.header_main h1 {
+.header-main h1 {
     font-size: 2rem;
     color: var(--color-text-muted);
 }
 
-.header_main p {
+.header-main p {
     color: var(--color-text);
     font-size: 1.2rem;
     margin-top: 0.5rem;
 }
 
-.header_github {
+.header-github {
     padding: 0.8rem 1.2rem;
     border: 1px solid var(--color-surface);
     border-radius: 50px;
@@ -55,7 +55,7 @@ header {
     cursor: pointer;
 }
 
-.header_github:hover {
+.header-github:hover {
     transform: translateY(-0.5rem);
     box-shadow: 0 4px 12px var(--shadow-color);
 }
@@ -76,13 +76,13 @@ main {
     padding: 2rem 1.6rem;
 }
 
-.sidebar_list {
+.sidebar-list {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
 }
 
-.sidebar_link {
+.sidebar-link {
     padding: 1.4rem 1.6rem;
     border: none;
     color: var(--color-text);
@@ -91,19 +91,19 @@ main {
     font-weight: 800;
 }
 
-li:last-child .sidebar_link {
+li:last-child .sidebar-link {
     border-radius: 0 0 15px 15px;
 }
 
-li:first-child .sidebar_link {
+li:first-child .sidebar-link {
     border-radius: 15px 15px 0 0;
 }
 
-li:not(:first-child):not(:last-child) .sidebar_link {
+li:not(:first-child):not(:last-child) .sidebar-link {
     border-radius: 15px;
 }
 
-.sidebar_link:hover {
+.sidebar-link:hover {
     background-color: var(--color-primary-contrast);
     color: var(--color-text);
 }
@@ -155,7 +155,7 @@ section h2 {
 }
 
 
-.section_like_list {
+.section-like-list {
     margin-top: 2rem;
     display: flex;
     gap: 1.2rem;
@@ -164,11 +164,11 @@ section h2 {
     animation: like-loop 15s linear infinite;
 }
 
-.section_like {
+.section-like {
     overflow: hidden;
 }
 
-.section_like:hover .section_like_list {
+.section-like:hover .section-like-list {
     animation-play-state: paused;
 }
 
@@ -177,7 +177,7 @@ section h2 {
     to { transform: translateX(-50%); }
 }
 
-.section_like_item {
+.section-like-item {
     width: 20rem;
     aspect-ratio: 1 / 1;
     border-radius: 16px;
@@ -185,13 +185,13 @@ section h2 {
     overflow: hidden;
 }
 
-.section_like_item img {
+.section-like-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.interest_grid {
+.interest-grid {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -199,24 +199,24 @@ section h2 {
 }
 
 @media (max-width: 1200px) {
-    .interest_grid {
+    .interest-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 992px) {
-    .interest_grid {
+    .interest-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .interest_grid {
+    .interest-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-.interest_card {
+.interest-card {
     background: var(--color-surface);
     border: 1px solid var(--color-primary-contrast);
     border-radius: 16px;
@@ -224,37 +224,37 @@ section h2 {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.interest_card:hover {
+.interest-card:hover {
     transform: translateY(-0.6rem);
     box-shadow: 0 8px 24px var(--shadow-color);
 }
 
-.interest_thumb {
+.interest-thumb {
     border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 1 / 1;
 }
 
-.interest_thumb img {
+.interest-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.interest_title {
+.interest-title {
     margin-top: 1.2rem;
     font-size: 1.6rem;
     color: var(--color-text-muted);
 }
 
-.interest_actions {
+.interest-actions {
     margin-top: 1.2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.interest_btn {
+.interest-btn {
     padding: 0.9rem 1rem;
     border-radius: 50px;
     font-size: 1.4rem;
@@ -262,35 +262,35 @@ section h2 {
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.interest_btn--like {
+.interest-btn--like {
     background: var(--color-surface-60);
     border: 1px solid var(--color-primary-contrast);
     color: var(--color-text-muted);
 }
 
-.interest_btn--hate {
+.interest-btn--hate {
     background: var(--color-surface-60);
     border: 1px solid var(--color-primary-contrast);
     color: var(--color-text-muted);
 }
 
-.interest_btn--like:hover {
+.interest-btn--like:hover {
     background: var(--color-primary-contrast);
     color: var(--color-surface);
     transform: translateY(-0.2rem);
 }
 
-.interest_btn--hate:hover {
+.interest-btn--hate:hover {
     background: rgba(219, 77, 77, 0.85);
     color: var(--color-surface);
     transform: translateY(-0.2rem);
 }
 
 
-.section_to .section_title {
+.section-to .section-title {
     font-size: 2.4rem;
 }
-.to_card {
+.to-card {
     margin-top: 1.6rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -300,7 +300,7 @@ section h2 {
     gap: 1.2rem;
 }
 
-.to_item {
+.to-item {
     position: relative;
     padding: 1.2rem 4.2rem;
     border-radius: 12px;
@@ -310,13 +310,13 @@ section h2 {
     font-weight: 700;
 }
 
-.to_item::before {
+.to-item::before {
     content: "📣";
     position: absolute;
     left: 1.2rem;
 }
 
-.to_item.is-done::after {
+.to-item.is-done::after {
     content: "✅";
     border: none;
     width: auto;
@@ -330,7 +330,7 @@ section h2 {
     border-top: 1px solid var(--color-primary-contrast);
     padding: 3rem 2rem;
 }
-.footer_text {
+.footer-text {
     text-align: center;
     font-size: 1.6rem;
     font-weight: 800;
