@@ -1,17 +1,23 @@
 :root {
-  /* 기본 색상 */
-  --color-surface: #ffffff;
+  /* Primitive tokens (design-system level) */
+  --neutral-0: #ffffff;
+  --neutral-900: #000000;
+  --slate-900-a18: rgba(15, 23, 42, 0.18);
+  --neutral-0-a60: rgba(255, 255, 255, 0.6);
 
-  /* 텍스트 */
-  --color-text: #ffffff;
-  --color-text-muted: #000000;
+  --brand-200: #a7f3d0;
+  --brand-500: rgb(80, 208, 174);
 
-  /* UI */
-  --color-border: rgba(15, 23, 42, 0.18);
-  --shadow-color: rgba(15, 23, 42, 0.18);
-  --color-surface-60: rgba(255, 255, 255, 0.6);
+  /* Semantic tokens (app meaning) */
+  --color-surface: var(--neutral-0);
+  --color-text: var(--neutral-0);
+  --color-text-muted: var(--neutral-900);
 
-  /* 주요 색*/
-  --color-primary: #a7f3d0;
-  --color-primary-contrast: rgb(80, 208, 174);
+  --color-border: var(--slate-900-a18);
+  --shadow-color: var(--slate-900-a18);
+
+  --color-surface-60: var(--neutral-0-a60);
+
+  --color-primary: var(--brand-200);
+  --color-primary-contrast: var(--brand-500);
 }
