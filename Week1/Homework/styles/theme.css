@@ -1,5 +1,4 @@
 :root {
-  /* Primitive tokens (design-system level) */
   --neutral-0: #ffffff;
   --neutral-900: #000000;
   --slate-900-a18: rgba(15, 23, 42, 0.18);
@@ -8,7 +7,6 @@
   --brand-200: #a7f3d0;
   --brand-500: rgb(80, 208, 174);
 
-  /* Semantic tokens (app meaning) */
   --color-surface: var(--neutral-0);
   --color-text: var(--neutral-0);
   --color-text-muted: var(--neutral-900);
