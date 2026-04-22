@@ -16,6 +16,8 @@
   --slate-900-a01: rgba(15, 23, 42, 0.01);
   --slate-900-a03: rgba(15, 23, 42, 0.03);
   --slate-900-a07: rgba(15, 23, 42, 0.07);
+  --slate-900-a45: rgba(15, 23, 42, 0.45);
+  --slate-900-a60: rgba(15, 23, 42, 0.6);
 
   --blue-500-a06: rgba(59, 130, 246, 0.06);
   --red-600-a90: rgba(220, 38, 38, 0.9);
@@ -31,7 +33,6 @@
   --color-border: var(--slate-900-a12);
   --shadow-color: var(--slate-900-a18);
 
-  /* UI tints */
   --color-table-head-bg: var(--slate-900-a07);
   --color-table-row-hover: var(--blue-500-a06);
   --color-table-row-stripe: var(--slate-900-a01);
