@@ -1,6 +1,8 @@
 import { getExpenses, setFilteredExpenses } from "../state.js";
 import { renderTable } from "../render/renderTable.js";
 import { CATEGORY_LABEL, PAYMENT_LABEL } from "../constants.js";
+import { applySort } from "./sort.js";
+import { getSort } from "../state.js";
 
 function normalize(value) {
   return String(value ?? "").trim().toLowerCase();
@@ -53,8 +55,9 @@ export function bindFilters() {
       return true;
     });
 
-    setFilteredExpenses(next);
-    renderTable(next);
+    const sorted = applySort(next, getSort());
+    setFilteredExpenses(sorted);
+    renderTable(sorted);
   };
 
   form.addEventListener("submit", (e) => {
@@ -70,8 +73,9 @@ export function bindFilters() {
       paySelect.value = "all";
 
       const all = getExpenses();
-      setFilteredExpenses(all);
-      renderTable(all);
+      const sorted = applySort(all, getSort());
+      setFilteredExpenses(sorted);
+      renderTable(sorted);
     });
   }
 }
