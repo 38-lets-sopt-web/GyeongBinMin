@@ -76,21 +76,21 @@
         </section>
         <section class="result">
             <div class="result-toolbar">
-                <div class="result-toolbar__left">
-                    <label class="result-toolbar__label" for="sort">
+                <div class="result-toolbar-left">
+                    <label class="result-toolbar-label" for="sort">
                         정렬
                     </label>
-                    <select id="sort" class="result-toolbar__select">
+                    <select id="sort" class="result-toolbar-select">
                         <option value="date-desc">날짜 내림차순</option>
                         <option value="date-asc">날짜 오름차순</option>
                     </select>
                 </div>
 
-                <div class="result-toolbar__right">
-                    <button type="button" class="result-toolbar__btn result-toolbar__btn--delete">
+                <div class="result-toolbar-right">
+                    <button type="button" class="result-toolbar-btn result-toolbar-btn--delete">
                         선택 삭제
                     </button>
-                    <button type="button" class="result-toolbar__btn result-toolbar__btn--add">
+                    <button type="button" class="result-toolbar-btn result-toolbar-btn--add">
                         추가
                     </button>
                 </div>
@@ -121,6 +121,71 @@
             </div>
         </section>
     </main>
+    <div class="modal" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">내역 추가</h2>
+                <button type="button" class="modal-close" aria-label="닫기">×</button>
+            </div>
+
+            <form class="modal-form">
+                <div class="modal-field modal-field--title">
+                    <label class="modal-label" for="new-title">제목</label>
+                    <input id="new-title" class="modal-input" type="text" placeholder="제목을 입력해주세요." />
+                </div>
+
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-type">유형</label>
+                        <select id="new-type" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="income">수입 (+)</option>
+                            <option value="expense">지출 (-)</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-amount">금액</label>
+                        <input id="new-amount" class="modal-input" type="number" placeholder="금액을 입력해주세요." />
+                    </div>
+                </div>
+
+                <div class="modal-field">
+                    <label class="modal-label" for="new-date">날짜</label>
+                    <input id="new-date" class="modal-input" type="date" />
+                </div>
+
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-category">카테고리</label>
+                        <select id="new-category" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="food">식비</option>
+                            <option value="salary">월급</option>
+                            <option value="culture">문화</option>
+                            <option value="transport">교통</option>
+                            <option value="living">생활</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-pay">결제수단</label>
+                        <select id="new-pay" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="cash">현금</option>
+                            <option value="credit-card">신용카드</option>
+                            <option value="debit-card">체크카드</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-submit">추가</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
 </body>
 </html>
