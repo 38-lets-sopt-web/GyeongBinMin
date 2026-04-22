@@ -1,0 +1,40 @@
+:root {
+  
+  --neutral-0: #ffffff;
+  --neutral-900: #0b1220;
+
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-900: #0b1f4d;
+
+  --slate-900-a12: rgba(15, 23, 42, 0.12);
+  --slate-900-a18: rgba(15, 23, 42, 0.18);
+  --slate-900-a01: rgba(15, 23, 42, 0.01);
+  --slate-900-a03: rgba(15, 23, 42, 0.03);
+  --slate-900-a07: rgba(15, 23, 42, 0.07);
+
+  --blue-500-a06: rgba(59, 130, 246, 0.06);
+  --red-600-a90: rgba(220, 38, 38, 0.9);
+
+  --color-bg: var(--blue-50);
+  --color-content: var(--neutral-0);
+  --color-text: var(--neutral-900);
+  --color-text-muted: rgba(11, 18, 32, 0.7);
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-primary-contrast: var(--neutral-0);
+
+  --color-border: var(--slate-900-a12);
+  --shadow-color: var(--slate-900-a18);
+
+  /* UI tints */
+  --color-table-head-bg: var(--slate-900-a07);
+  --color-table-row-hover: var(--blue-500-a06);
+  --color-table-row-stripe: var(--slate-900-a01);
+  --color-table-foot-bg: var(--slate-900-a03);
+  --color-danger: var(--red-600-a90);
+}
