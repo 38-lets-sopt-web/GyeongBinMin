@@ -161,6 +161,12 @@
   background: var(--color-table-row-hover);
 }
 
+.result-table-empty td {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2.4rem 1.4rem;
+}
+
 .result-table td.is-plus {
   color: var(--blue-700);
   font-weight: 900;
@@ -184,4 +190,13 @@
 
 .result-table tfoot td:nth-child(3) {
   color: var(--blue-700);
+}
+
+/* total value color (class is set by JS) */
+.result-table tfoot td.is-plus {
+  color: var(--blue-700);
+}
+
+.result-table tfoot td.is-minus {
+  color: var(--color-danger);
 }
