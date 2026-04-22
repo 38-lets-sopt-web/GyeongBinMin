@@ -19,6 +19,40 @@ function matchesTitle(expense, keyword) {
   return normalize(expense.title).includes(keyword);
 }
 
+export function applyFilters(expenses) {
+  const titleInput = document.querySelector("#filter-title");
+  const typeSelect = document.querySelector("#filter-type");
+  const categorySelect = document.querySelector("#filter-category");
+  const paySelect = document.querySelector("#filter-pay");
+
+  const keyword = normalize(titleInput?.value);
+  const type = normalize(typeSelect?.value);
+  const category = normalize(categorySelect?.value);
+  const payment = normalize(paySelect?.value);
+
+  const next = expenses.filter((e) => {
+    if (!matchesTitle(e, keyword)) return false;
+
+    if (type && type !== "all") {
+      if (getTypeFromAmount(e.amount) !== type) return false;
+    }
+
+    if (category && category !== "all") {
+      const label = CATEGORY_LABEL[category] ?? category;
+      if (normalize(e.category) !== normalize(label)) return false;
+    }
+
+    if (payment && payment !== "all") {
+      const label = PAYMENT_LABEL[payment] ?? payment;
+      if (normalize(e.payment) !== normalize(label)) return false;
+    }
+
+    return true;
+  });
+
+  return applySort(next, getSort());
+}
+
 export function bindFilters() {
   const form = document.querySelector(".filter-form");
   const titleInput = document.querySelector("#filter-title");
@@ -30,32 +64,7 @@ export function bindFilters() {
   if (!form || !titleInput || !typeSelect || !categorySelect || !paySelect) return;
 
   const apply = () => {
-    const keyword = normalize(titleInput.value);
-    const type = normalize(typeSelect.value);
-    const category = normalize(categorySelect.value);
-    const payment = normalize(paySelect.value);
-
-    const next = getExpenses().filter((e) => {
-      if (!matchesTitle(e, keyword)) return false;
-
-      if (type && type !== "all") {
-        if (getTypeFromAmount(e.amount) !== type) return false;
-      }
-
-      if (category && category !== "all") {
-        const label = CATEGORY_LABEL[category] ?? category;
-        if (normalize(e.category) !== normalize(label)) return false;
-      }
-
-      if (payment && payment !== "all") {
-        const label = PAYMENT_LABEL[payment] ?? payment;
-        if (normalize(e.payment) !== normalize(label)) return false;
-      }
-
-      return true;
-    });
-
-    const sorted = applySort(next, getSort());
+    const sorted = applyFilters(getExpenses());
     setFilteredExpenses(sorted);
     renderTable(sorted);
   };
