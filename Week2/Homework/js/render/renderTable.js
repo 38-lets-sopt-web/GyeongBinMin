@@ -30,7 +30,7 @@ export function renderTable(expenses) {
         return `
           <tr data-id="${escapeHtml(e.id)}">
             <td><input type="checkbox" class="row-check" ${checked} /></td>
-            <td>${escapeHtml(e.title ?? "")}</td>
+            <td><button type="button" class="detail-open">${escapeHtml(e.title ?? "")}</button></td>
             <td class="${escapeHtml(amountClass)}">${escapeHtml(formatAmount(e.amount ?? ""))}</td>
             <td>${escapeHtml(e.date ?? "")}</td>
             <td>${escapeHtml(e.category ?? "")}</td>

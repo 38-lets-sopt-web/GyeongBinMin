@@ -125,6 +125,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+.detail-open {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.detail-open:hover {
+  text-decoration: underline;
+}
+
 .result-table th:nth-child(4),
 .result-table td:nth-child(4) {
   width: 14rem;
