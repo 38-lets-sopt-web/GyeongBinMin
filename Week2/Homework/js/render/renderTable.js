@@ -1,4 +1,5 @@
 import { formatAmount, getAmountClass, sumAmounts } from "../utils/format.js";
+import { getCheckedIds } from "../state.js";
 
 function escapeHtml(str) {
   return String(str)
@@ -13,6 +14,7 @@ export function renderTable(expenses) {
   const tbody = document.querySelector(".result-table tbody");
   const tfoot = document.querySelector(".result-table tfoot");
   if (!tbody || !tfoot) return;
+  const checkedIds = getCheckedIds();
 
   if (!expenses.length) {
     tbody.innerHTML = `
@@ -24,9 +26,10 @@ export function renderTable(expenses) {
     tbody.innerHTML = expenses
       .map((e) => {
         const amountClass = getAmountClass(e.amount);
+        const checked = checkedIds.has(String(e.id)) ? "checked" : "";
         return `
           <tr data-id="${escapeHtml(e.id)}">
-            <td><input type="checkbox" class="row-check" /></td>
+            <td><input type="checkbox" class="row-check" ${checked} /></td>
             <td>${escapeHtml(e.title ?? "")}</td>
             <td class="${escapeHtml(amountClass)}">${escapeHtml(formatAmount(e.amount ?? ""))}</td>
             <td>${escapeHtml(e.date ?? "")}</td>
