@@ -8,6 +8,7 @@ import { bindSelection } from "./features/selection.js";
 import { bindSort } from "./features/sort.js";
 import { bindDelete } from "./features/delete.js";
 import { bindModalAdd } from "./features/modalAdd.js";
+import { bindHeaderRefresh } from "./features/headerRefresh.js";
 
 function init() {
   seedIfEmpty(seedExpenses);
@@ -16,6 +17,7 @@ function init() {
   setExpenses(expenses);
   renderTable(getFilteredExpenses());
 
+  bindHeaderRefresh();
   bindFilters();
   bindSelection();
   bindSort();
