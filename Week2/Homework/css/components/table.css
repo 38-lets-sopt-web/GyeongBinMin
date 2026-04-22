@@ -87,12 +87,6 @@
   background: var(--color-surface);
 }
 
-.result-table thead,
-.result-table tbody,
-.result-table tfoot {
-  display: table-row-group;
-}
-
 .result-table th,
 .result-table td {
   padding: 1.2rem 1.4rem;
@@ -199,9 +193,6 @@
   text-transform: lowercase;
 }
 
-.result-table tfoot td:nth-child(3) {
-  color: var(--blue-700);
-}
 .result-table tfoot td.is-plus {
   color: var(--blue-700);
 }
