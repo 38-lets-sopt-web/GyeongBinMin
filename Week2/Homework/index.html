@@ -185,6 +185,39 @@
             </form>
         </div>
     </div>
+
+    <div class="modal modal-detail" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+            <div class="modal-header">
+                <h2 id="detail-title" class="modal-title">항목 상세</h2>
+                <button type="button" class="detail-close" aria-label="닫기">×</button>
+            </div>
+
+            <div class="detail-body">
+                <div class="detail-row">
+                    <div class="detail-key">제목:</div>
+                    <div class="detail-val" data-detail="title"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">금액:</div>
+                    <div class="detail-val" data-detail="amount"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">날짜:</div>
+                    <div class="detail-val" data-detail="date"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">카테고리:</div>
+                    <div class="detail-val" data-detail="category"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">결제수단:</div>
+                    <div class="detail-val" data-detail="payment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
