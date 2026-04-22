@@ -191,8 +191,6 @@
 .result-table tfoot td:nth-child(3) {
   color: var(--blue-700);
 }
-
-/* total value color (class is set by JS) */
 .result-table tfoot td.is-plus {
   color: var(--blue-700);
 }
