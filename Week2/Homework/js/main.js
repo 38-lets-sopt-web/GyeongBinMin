@@ -9,6 +9,7 @@ import { bindSort } from "./features/sort.js";
 import { bindDelete } from "./features/delete.js";
 import { bindModalAdd } from "./features/modalAdd.js";
 import { bindHeaderRefresh } from "./features/headerRefresh.js";
+import { bindModalDetail } from "./features/modalDetail.js";
 
 function init() {
   seedIfEmpty(seedExpenses);
@@ -23,6 +24,7 @@ function init() {
   bindSort();
   bindDelete();
   bindModalAdd();
+  bindModalDetail();
 }
 
 document.addEventListener("DOMContentLoaded", init);
