@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>민경빈의 가계부</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-item">
+            <button class="header-button">
+                🔃
+            </button>
+        </div>
+        <div class="header-item">
+            <h1 class="header-title">
+                민경빈의 가계부
+            </h1>
+        </div>
+        <div class="header-item">
+            <p class="header-subtitle">
+                SOPT 38th WEB
+            </p>
+        </div>
+    </header>
+    <main>
+        <section class="search-filter">
+            <h2 class="filter-title">
+                검색 필터
+            </h2>
+
+            <form class="filter-form">
+                <div class="filter-row filter-row--title">
+                    <label for="filter-title">제목</label>
+                    <input type="text" 
+                        id="filter-title" 
+                        class="filter-input" 
+                        placeholder="제목을 입력해주세요."/>
+                </div>
+                <div class="filter-row filter-row--type">
+                    <label for="filter-type">유형</label>
+                    <select id="filter-type">
+                        <option value="all">전체</option>
+                        <option value="income">수입</option>
+                        <option value="expense">지출</option>
+                    </select>
+                </div>
+                <div class="filter-row filter-row--category">
+                    <label for="filter-category">카테고리</label>
+                    <select id="filter-category" class="filter-select">
+                        <option value="all">전체</option>
+                        <option value="food">식비</option>
+                        <option value="salary">월급</option>
+                        <option value="culture">문화</option>
+                        <option value="transport">교통</option>
+                        <option value="living">생활</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                <div class="filter-row filter-row--pay">
+                    <label for="filter-pay">결제수단</label>
+                    <select id="filter-pay">
+                        <option value="all">전체</option>
+                        <option value="cash">현금</option>
+                        <option value="credit-card">신용카드</option>
+                        <option value="debit-card">체크카드</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                <div class="filter-row filter-row--submit filter-row--reset">
+                    <button type="submit" class="filter-button" id="filter-submit">적용</button>
+                    <button type="reset" class="filter-button" id="filter-reset">초기화</button>
+                </div>
+            </form>
+        </section>
+        <section class="result">
+            <div class="result-toolbar">
+                <div class="result-toolbar-left">
+                    <label class="result-toolbar-label" for="sort">
+                        정렬
+                    </label>
+                    <select id="sort" class="result-toolbar-select">
+                        <option value="date-desc">날짜 내림차순</option>
+                        <option value="date-asc">날짜 오름차순</option>
+                    </select>
+                </div>
+
+                <div class="result-toolbar-right">
+                    <button type="button" class="result-toolbar-btn result-toolbar-btn--delete">
+                        선택 삭제
+                    </button>
+                    <button type="button" class="result-toolbar-btn result-toolbar-btn--add">
+                        추가
+                    </button>
+                </div>
+            </div>
+
+            <div class="result-table-wrap">
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select-all"></th>
+                            <th>제목</th>
+                            <th>금액</th>
+                            <th>날짜</th>
+                            <th>카테고리</th>
+                            <th>결제수단</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">total</td>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+    </main>
+    <div class="modal" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">내역 추가</h2>
+                <button type="button" class="modal-close" aria-label="닫기">×</button>
+            </div>
+
+            <form class="modal-form">
+                <div class="modal-field modal-field--title">
+                    <label class="modal-label" for="new-title">제목</label>
+                    <input id="new-title" class="modal-input" type="text" placeholder="제목을 입력해주세요." />
+                </div>
+
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-type">유형</label>
+                        <select id="new-type" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="income">수입 (+)</option>
+                            <option value="expense">지출 (-)</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-amount">금액</label>
+                        <input id="new-amount" class="modal-input" type="number" placeholder="금액을 입력해주세요." />
+                    </div>
+                </div>
+
+                <div class="modal-field">
+                    <label class="modal-label" for="new-date">날짜</label>
+                    <input id="new-date" class="modal-input" type="date" />
+                </div>
+
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-category">카테고리</label>
+                        <select id="new-category" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="food">식비</option>
+                            <option value="salary">월급</option>
+                            <option value="culture">문화</option>
+                            <option value="transport">교통</option>
+                            <option value="living">생활</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label class="modal-label" for="new-pay">결제수단</label>
+                        <select id="new-pay" class="modal-select">
+                            <option value="">선택</option>
+                            <option value="cash">현금</option>
+                            <option value="credit-card">신용카드</option>
+                            <option value="debit-card">체크카드</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-submit">추가</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal modal-detail" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+            <div class="modal-header">
+                <h2 id="detail-title" class="modal-title">항목 상세</h2>
+                <button type="button" class="detail-close" aria-label="닫기">×</button>
+            </div>
+
+            <div class="detail-body">
+                <div class="detail-row">
+                    <div class="detail-key">제목:</div>
+                    <div class="detail-val" data-detail="title"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">금액:</div>
+                    <div class="detail-val" data-detail="amount"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">날짜:</div>
+                    <div class="detail-val" data-detail="date"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">카테고리:</div>
+                    <div class="detail-val" data-detail="category"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-key">결제수단:</div>
+                    <div class="detail-val" data-detail="payment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
