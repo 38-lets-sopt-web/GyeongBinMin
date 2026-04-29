@@ -43,6 +43,7 @@ export function renderTable(expenses) {
 
   const total = sumAmounts(expenses);
   const tds = tfoot.querySelectorAll("td");
+  
   if (tds.length >= 2) {
     const totalCell = tds[1];
     const totalClass = getAmountClass(total);
