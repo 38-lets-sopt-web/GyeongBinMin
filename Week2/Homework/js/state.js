@@ -2,6 +2,12 @@ const state = {
   expenses: [],
   filtered: [],
   sort: "date-desc",
+  filters: {
+    title: "",
+    type: "all",
+    category: "all",
+    payment: "all",
+  },
   checkedIds: new Set(),
 };
 
@@ -28,6 +34,17 @@ export function getSort() {
 
 export function setSort(sort) {
   state.sort = sort;
+}
+
+export function getFilters() {
+  return state.filters;
+}
+
+export function setFilters(filters) {
+  state.filters = {
+    ...state.filters,
+    ...filters,
+  };
 }
 
 export function getCheckedIds() {

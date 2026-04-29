@@ -1,4 +1,4 @@
-import { getExpenses, setFilteredExpenses } from "../state.js";
+import { getExpenses, getFilters, setFilteredExpenses, setFilters } from "../state.js";
 import { renderTable } from "../render/renderTable.js";
 import { CATEGORY_LABEL, PAYMENT_LABEL } from "../constants.js";
 import { applySort } from "./sort.js";
@@ -20,15 +20,11 @@ function matchesTitle(expense, keyword) {
 }
 
 export function applyFilters(expenses) {
-  const titleInput = document.querySelector("#filter-title");
-  const typeSelect = document.querySelector("#filter-type");
-  const categorySelect = document.querySelector("#filter-category");
-  const paySelect = document.querySelector("#filter-pay");
-
-  const keyword = normalize(titleInput?.value);
-  const type = normalize(typeSelect?.value);
-  const category = normalize(categorySelect?.value);
-  const payment = normalize(paySelect?.value);
+  const filters = getFilters();
+  const keyword = normalize(filters.title);
+  const type = normalize(filters.type);
+  const category = normalize(filters.category);
+  const payment = normalize(filters.payment);
 
   const next = expenses.filter((e) => {
     if (!matchesTitle(e, keyword)) return false;
@@ -63,7 +59,19 @@ export function bindFilters() {
 
   if (!form || !titleInput || !typeSelect || !categorySelect || !paySelect) return;
 
+  const current = getFilters();
+  titleInput.value = current.title ?? "";
+  typeSelect.value = current.type ?? "all";
+  categorySelect.value = current.category ?? "all";
+  paySelect.value = current.payment ?? "all";
+
   const apply = () => {
+    setFilters({
+      title: titleInput.value,
+      type: typeSelect.value,
+      category: categorySelect.value,
+      payment: paySelect.value,
+    });
     const sorted = applyFilters(getExpenses());
     setFilteredExpenses(sorted);
     renderTable(sorted);
@@ -76,13 +84,19 @@ export function bindFilters() {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
+      setFilters({
+        title: "",
+        type: "all",
+        category: "all",
+        payment: "all",
+      });
+
       titleInput.value = "";
       typeSelect.value = "all";
       categorySelect.value = "all";
       paySelect.value = "all";
 
-      const all = getExpenses();
-      const sorted = applySort(all, getSort());
+      const sorted = applyFilters(getExpenses());
       setFilteredExpenses(sorted);
       renderTable(sorted);
     });

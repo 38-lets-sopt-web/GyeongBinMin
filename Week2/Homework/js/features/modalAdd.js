@@ -18,6 +18,21 @@ function nextId(expenses) {
   return max + 1;
 }
 
+function validateExpenseForm(data) {
+  const { title, type, amountRaw, date, categoryKey, payKey } = data;
+
+  if (!title || !type || !amountRaw || !date || !categoryKey || !payKey) {
+    return { valid: false, message: "모든 항목을 입력해주세요." };
+  }
+
+  const amountNum = Number(amountRaw);
+  if (!Number.isFinite(amountNum) || amountNum <= 0) {
+    return { valid: false, message: "금액을 올바르게 입력해주세요." };
+  }
+
+  return { valid: true, amountNum };
+}
+
 export function bindModalAdd() {
   const addBtn = document.querySelector(".result-toolbar-btn--add");
   const modal = document.querySelector(".modal");
@@ -54,24 +69,23 @@ export function bindModalAdd() {
   });
 
   submitBtn.addEventListener("click", () => {
-    const title = String(titleEl.value ?? "").trim();
-    const type = String(typeEl.value ?? "").trim();
-    const amountRaw = String(amountEl.value ?? "").trim();
-    const date = String(dateEl.value ?? "").trim();
-    const categoryKey = String(categoryEl.value ?? "").trim();
-    const payKey = String(payEl.value ?? "").trim();
+    const formData = {
+      title: String(titleEl.value ?? "").trim(),
+      type: String(typeEl.value ?? "").trim(),
+      amountRaw: String(amountEl.value ?? "").trim(),
+      date: String(dateEl.value ?? "").trim(),
+      categoryKey: String(categoryEl.value ?? "").trim(),
+      payKey: String(payEl.value ?? "").trim(),
+    };
 
-    if (!title || !type || !amountRaw || !date || !categoryKey || !payKey) {
-      alert("모든 항목을 입력해주세요.");
+    const validation = validateExpenseForm(formData);
+    if (!validation.valid) {
+      alert(validation.message);
       return;
     }
 
-    const amountNum = Number(amountRaw);
-    if (!Number.isFinite(amountNum) || amountNum <= 0) {
-      alert("금액을 올바르게 입력해주세요.");
-      return;
-    }
-
+    const { title, type, date, categoryKey, payKey } = formData;
+    const { amountNum } = validation;
     const amount = type === "expense" ? -Math.abs(amountNum) : Math.abs(amountNum);
     const category = CATEGORY_LABEL[categoryKey] ?? categoryKey;
     const payment = PAYMENT_LABEL[payKey] ?? payKey;
