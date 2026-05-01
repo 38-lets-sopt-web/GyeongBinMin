@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 
 import type { GameLevelId } from '@/shared/constants/gameLevel'
 import { getGameLevelConfig } from '@/shared/constants/gameLevel'
+import { GUIDE_MESSAGES } from '@/widgets/game/constants'
 import { getHoleAppearance } from '@/widgets/game/lib/holeAppearance'
 import type { GamePhase } from '@/widgets/game/types'
 
@@ -21,7 +22,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
   const [score, setScore] = useState(0)
   const [successCount, setSuccessCount] = useState(0)
   const [failCount, setFailCount] = useState(0)
-  const [guideMessage, setGuideMessage] = useState('시작 버튼을 눌러 게임을 시작하세요.')
+  const [guideMessage, setGuideMessage] = useState(GUIDE_MESSAGES.idle)
   const [endModalOpen, setEndModalOpen] = useState(false)
   const [lastFinalScore, setLastFinalScore] = useState(0)
 
@@ -42,7 +43,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
       halt()
       setPhase('ended')
       setLastFinalScore(finalScore)
-      setGuideMessage(`게임 종료! 최종 점수 ${finalScore}점`)
+      setGuideMessage(GUIDE_MESSAGES.ended(finalScore))
       setEndModalOpen(true)
       onNaturalComplete?.({ level, score: finalScore })
     },
@@ -65,7 +66,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
     scoreRef.current = 0
     setSuccessCount(0)
     setFailCount(0)
-    setGuideMessage('두더지는 +1점, 폭탄은 -1점입니다.')
+    setGuideMessage(GUIDE_MESSAGES.playing)
     setEndModalOpen(false)
     isPlayingRef.current = true
     phaseRef.current = 'playing'
@@ -83,7 +84,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
     scoreRef.current = 0
     setSuccessCount(0)
     setFailCount(0)
-    setGuideMessage('중단되었습니다. 다시 시작할 수 있습니다.')
+    setGuideMessage(GUIDE_MESSAGES.stopped)
     setEndModalOpen(false)
   }, [halt])
 
@@ -92,7 +93,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
     isPlayingRef.current = false
     phaseRef.current = 'idle'
     setPhase('idle')
-    setGuideMessage('시작 버튼을 눌러 게임을 시작하세요.')
+    setGuideMessage(GUIDE_MESSAGES.idle)
     setEndModalOpen(false)
   }, [halt])
 
@@ -108,7 +109,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
           return next
         })
         setSuccessCount((c) => c + 1)
-        setGuideMessage('두더지 잡기 성공! +1점')
+        setGuideMessage(GUIDE_MESSAGES.moleHit)
         return
       }
 
@@ -118,7 +119,7 @@ export function useGameSession(level: GameLevelId, options?: UseGameSessionOptio
         return next
       })
       setFailCount((c) => c + 1)
-      setGuideMessage('폭탄입니다! -1점')
+      setGuideMessage(GUIDE_MESSAGES.bombHit)
     },
     [tryHitHole],
   )

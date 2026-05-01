@@ -1,3 +1,5 @@
+export { GUIDE_MESSAGES } from './guideMessages'
+
 export const MOLE_HIT_MS = 700
 
 export const SPAWN_DELAY_AFTER_BOMB_MS = 250
