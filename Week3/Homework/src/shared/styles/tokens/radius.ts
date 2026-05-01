@@ -1,7 +1,8 @@
 export const radius = {
-  sm: '8px',
-  md: '12px',
-  lg: '16px',
-  xl: '20px',
-  full: '999px',
+  sm: '0.5rem',
+  md: '0.75rem',
+  lg: '1rem',
+  xl: '1.25rem',
+  /** 알약·원형에 가깝게 쓰는 큰 radius */
+  full: '62.5rem',
 } as const

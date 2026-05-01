@@ -1,14 +1,23 @@
 import '../shared/styles/reset.css'
 import '../shared/styles/global.css'
 
-function App() {
+import { useState } from 'react'
+
+import Header from '@/shared/layout/header/Header'
+import { TABS, type TabValue } from '@/shared/constants/tab'
+import GamePage from '@/pages/game/GamePage'
+import RankingPage from '@/pages/ranking/RankingPage'
+
+import * as styles from './App.css'
+
+const App = () => {
+  const [tab, setTab] = useState<TabValue>(TABS.GAME)
+
   return (
-    <main>
-      <section>
-        <h1>Week3 Homework</h1>
-        <p>초기세팅</p>
-      </section>
-    </main>
+    <div className={styles.pageContainer}>
+      <Header currentTab={tab} onTabChange={setTab} />
+      {tab === TABS.GAME ? <GamePage /> : <RankingPage />}
+    </div>
   )
 }
 

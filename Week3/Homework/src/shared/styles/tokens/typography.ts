@@ -1,11 +1,11 @@
 export const typography = {
   size: {
-    xs: '12px',
-    sm: '14px',
-    md: '16px',
-    lg: '18px',
-    xl: '22px',
-    xxl: '28px',
+    xs: '0.75rem',
+    sm: '0.875rem',
+    md: '1rem',
+    lg: '1.125rem',
+    xl: '1.375rem',
+    xxl: '1.75rem',
   },
   lineHeight: {
     tight: '1.15',

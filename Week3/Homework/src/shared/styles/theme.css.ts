@@ -4,14 +4,12 @@ import { colors } from './tokens/color'
 import { font } from './tokens/font'
 import { radius } from './tokens/radius'
 import { shadow } from './tokens/shadow'
-import { space } from './tokens/space'
 import { typography } from './tokens/typography'
 import { zIndex } from './tokens/z-index'
 
 const tokens = {
   color: colors,
   font: { ...font, ...typography },
-  space,
   radius,
   shadow,
   zIndex,
