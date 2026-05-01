@@ -1,7 +1,7 @@
 import {
   RankingTable,
   type RankingEntry,
-} from '@/widgets/ranking/RankingTable/RankingTable'
+} from '@/widgets/ranking/components/RankingTable/RankingTable'
 
 import * as styles from './RankingPage.css'
 

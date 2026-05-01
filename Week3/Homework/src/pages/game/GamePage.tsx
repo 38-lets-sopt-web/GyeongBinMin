@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import type { GameLevelId } from '@/shared/constants/gameLevel'
 import { getGameLevelConfig } from '@/shared/constants/gameLevel'
-import { GameBoard } from '@/widgets/game/GameBoard/GameBoard'
-import { GameStatusPanel } from '@/widgets/game/GameStatusPanel/GameStatusPanel'
+import { GameBoard } from '@/widgets/game/components/GameBoard/GameBoard'
+import { GameStatusPanel } from '@/widgets/game/components/GameStatusPanel/GameStatusPanel'
 
 import * as styles from './GamePage.css'
 

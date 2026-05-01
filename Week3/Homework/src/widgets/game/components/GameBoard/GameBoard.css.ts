@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { themeVars } from '../../../shared/styles/theme.css'
+import { themeVars } from '../../../../shared/styles/theme.css'
 
 export const section = style({
   width: '100%',
