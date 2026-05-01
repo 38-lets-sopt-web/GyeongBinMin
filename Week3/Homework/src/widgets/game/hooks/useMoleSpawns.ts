@@ -93,12 +93,7 @@ export function useMoleSpawns(holeCount: number, isPlayingRef: RefObject<boolean
   const tryHitHole = useCallback(
     (index: number): HoleClickOutcome => {
       if (!isPlayingRef.current) return 'none'
-      if (
-        activeIndex !== index ||
-        activeKind === null ||
-        activeKind === 'moleHit' ||
-        activeKind === 'bombHit'
-      ) {
+      if (activeIndex !== index || activeKind === null || activeKind === 'moleHit') {
         return 'none'
       }
 

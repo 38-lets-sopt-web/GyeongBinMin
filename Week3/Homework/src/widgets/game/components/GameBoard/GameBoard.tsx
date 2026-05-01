@@ -25,14 +25,12 @@ const HOLE_LABEL: Record<HoleAppearance, string> = {
   mole: '두더지',
   bomb: '폭탄',
   moleHit: '맞은 두더지',
-  bombHit: '맞은 폭탄',
 }
 
 function holeButtonClass(appearance: HoleAppearance) {
   if (appearance === 'mole') return `${styles.hole} ${styles.moleCell}`
   if (appearance === 'bomb') return `${styles.hole} ${styles.bombCell}`
   if (appearance === 'moleHit') return `${styles.hole} ${styles.moleHitCell}`
-  if (appearance === 'bombHit') return `${styles.hole} ${styles.bombHitCell}`
   return styles.hole
 }
 

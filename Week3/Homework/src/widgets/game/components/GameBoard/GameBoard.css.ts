@@ -145,7 +145,3 @@ export const bombCell = style({
 export const moleHitCell = style({
   background: `linear-gradient(145deg, ${themeVars.color.coral500}44, ${themeVars.color.sky50})`,
 })
-
-export const bombHitCell = style({
-  background: `linear-gradient(145deg, ${themeVars.color.red500}55, ${themeVars.color.sky50})`,
-})

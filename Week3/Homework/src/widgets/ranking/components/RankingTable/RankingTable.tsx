@@ -1,18 +1,12 @@
-import type { GameLevelId } from '@/shared/constants/gameLevel'
 import { Card } from '@/shared/components/card/Card'
+import type { RankingRow } from '@/shared/types/ranking'
 
 import * as styles from './RankingTable.css'
 
-export type RankingEntry = {
-  rank: number
-  level: GameLevelId
-  score: number
-  /** ISO 8601 (예: 게임 종료 시각) */
-  recordedAt: string
-}
+export type { RankingRow }
 
 type RankingTableProps = {
-  rows: RankingEntry[]
+  rows: RankingRow[]
   onReset?: () => void
 }
 
@@ -61,13 +55,13 @@ export function RankingTable({ rows, onReset = () => {} }: RankingTableProps) {
                     점수
                   </th>
                   <th scope="col" className={styles.thTrail}>
-                    기록 시각
+                    성공 시간
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {rows.map((row) => (
-                  <tr key={`${row.rank}-${row.recordedAt}`} className={styles.row}>
+                  <tr key={row.id} className={styles.row}>
                     <td className={styles.td}>{row.rank}</td>
                     <td className={styles.td}>Level {row.level}</td>
                     <td className={styles.td}>{row.score}점</td>

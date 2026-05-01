@@ -7,7 +7,6 @@ export function getHoleAppearance(
 ): HoleAppearance {
   if (activeIndex !== index || activeKind === null) return 'hole'
   if (activeKind === 'moleHit') return 'moleHit'
-  if (activeKind === 'bombHit') return 'bombHit'
   if (activeKind === 'mole') return 'mole'
   return 'bomb'
 }
