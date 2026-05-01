@@ -123,7 +123,6 @@ export const hole = style({
   },
 })
 
-/** MoleImage · BombImage — 원형 구멍을 가득 채우고 넘치는 부분은 잘림 */
 export const moleBombImage = style({
   position: 'absolute',
   inset: 0,

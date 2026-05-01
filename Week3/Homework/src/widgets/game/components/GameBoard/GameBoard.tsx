@@ -1,6 +1,7 @@
 import { useId } from 'react'
 
 import MoleImage from '@/assets/image/du.webp'
+import MoleCaughtImage from '@/assets/image/ducatch.webp'
 import BombImage from '@/assets/image/me.webp'
 import type { GameLevelId } from '@/shared/constants/gameLevel'
 import { GAME_LEVEL_CONFIG, GAME_LEVEL_IDS } from '@/shared/constants/gameLevel'
@@ -35,14 +36,14 @@ function holeButtonClass(appearance: HoleAppearance) {
   return styles.hole
 }
 
-/** MoleImage -> 점수 + 타겟 */
 function moleImageFor(appearance: HoleAppearance) {
-  return appearance === 'mole' || appearance === 'moleHit' ? MoleImage : null
+  if (appearance === 'mole') return MoleImage
+  if (appearance === 'moleHit') return MoleCaughtImage
+  return null
 }
 
-/** BombImage -> 점수 - 타겟 */
 function bombImageFor(appearance: HoleAppearance) {
-  return appearance === 'bomb' || appearance === 'bombHit' ? BombImage : null
+  return appearance === 'bomb' ? BombImage : null
 }
 
 export function GameBoard({
