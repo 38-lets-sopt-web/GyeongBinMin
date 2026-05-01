@@ -21,8 +21,8 @@ export function useGameSession(level: GameLevelId) {
   const [endModalOpen, setEndModalOpen] = useState(false)
   const [lastFinalScore, setLastFinalScore] = useState(0)
 
-  const phaseRef = useRef(phase)
-  const scoreRef = useRef(score)
+  const phaseRef = useRef('idle')
+  const scoreRef = useRef(0)
   const isPlayingRef = useRef(false)
 
   const { activeIndex, activeKind, beginSpawning, halt, tryHitHole } = useMoleSpawns(
