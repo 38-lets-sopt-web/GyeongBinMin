@@ -5,12 +5,17 @@ import { GameBoard } from '@/widgets/game/components/GameBoard/GameBoard'
 import { GameEndModal } from '@/widgets/game/components/GameEndModal/GameEndModal'
 import { GameStatusPanel } from '@/widgets/game/components/GameStatusPanel/GameStatusPanel'
 import { useGameSession } from '@/widgets/game/hooks/useGameSession'
+import { recordRankingClear } from '@/shared/lib/rankingStorage'
 
 import * as styles from './GamePage.css'
 
 const GamePage = () => {
   const [level, setLevel] = useState<GameLevelId>(1)
-  const session = useGameSession(level)
+  const session = useGameSession(level, {
+    onNaturalComplete: ({ level: clearedLevel, score }) => {
+      recordRankingClear(clearedLevel, score)
+    },
+  })
 
   return (
     <div className={styles.page}>

@@ -10,10 +10,6 @@ import {
 import { rollRandomSpawn } from '@/widgets/game/lib/randomSpawn'
 import type { ActiveKind, HoleClickOutcome } from '@/widgets/game/types'
 
-/**
- * 두더지/폭탄 스폰, 노출 시간(피크), 두더지 맞음 연출 타이머만 담당한다.
- * 점수·라운드 여부는 부모가 ref로 전달한다.
- */
 export function useMoleSpawns(holeCount: number, isPlayingRef: RefObject<boolean>) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [activeKind, setActiveKind] = useState<ActiveKind | null>(null)
@@ -120,14 +116,10 @@ export function useMoleSpawns(holeCount: number, isPlayingRef: RefObject<boolean
         return 'mole'
       }
 
-      setActiveKind('bombHit')
       clearMoleHitTimer()
-      moleHitTimerRef.current = setTimeout(() => {
-        if (!isPlayingRef.current) return
-        setActiveIndex(null)
-        setActiveKind(null)
-        scheduleSpawnRef.current(SPAWN_DELAY_AFTER_BOMB_MS)
-      }, MOLE_HIT_MS)
+      setActiveIndex(null)
+      setActiveKind(null)
+      scheduleSpawnRef.current(SPAWN_DELAY_AFTER_BOMB_MS)
       return 'bomb'
     },
     [activeIndex, activeKind, clearMoleHitTimer, clearPeekTimer, isPlayingRef],

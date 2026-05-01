@@ -8,8 +8,12 @@ import type { GamePhase } from '@/widgets/game/types'
 import { useMoleSpawns } from './useMoleSpawns'
 import { useRoundCountdown } from './useRoundCountdown'
 
+type UseGameSessionOptions = {
+  onNaturalComplete?: (payload: { level: GameLevelId; score: number }) => void
+}
 
-export function useGameSession(level: GameLevelId) {
+export function useGameSession(level: GameLevelId, options?: UseGameSessionOptions) {
+  const onNaturalComplete = options?.onNaturalComplete
   const { gridSize, timeLimitSec } = getGameLevelConfig(level)
   const holeCount = gridSize * gridSize
 
@@ -40,8 +44,9 @@ export function useGameSession(level: GameLevelId) {
       setLastFinalScore(finalScore)
       setGuideMessage(`게임 종료! 최종 점수 ${finalScore}점`)
       setEndModalOpen(true)
+      onNaturalComplete?.({ level, score: finalScore })
     },
-    [halt],
+    [halt, level, onNaturalComplete],
   )
 
   const handleTimeUp = useCallback(() => {
