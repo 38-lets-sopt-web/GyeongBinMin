@@ -1,23 +1,14 @@
-import {
-  RankingTable,
-  type RankingEntry,
-} from '@/widgets/ranking/components/RankingTable/RankingTable'
+import { RankingTable } from '@/widgets/ranking/components/RankingTable/RankingTable'
+import { useRankingBoard } from '@/widgets/ranking/hooks/useRankingBoard'
 
 import * as styles from './RankingPage.css'
 
-const MOCK_RANKING: RankingEntry[] = [
-  {
-    rank: 1,
-    level: 2,
-    score: 20,
-    recordedAt: '2026-04-25T01:14:15',
-  },
-]
-
 const RankingPage = () => {
+  const { rows, resetRanking } = useRankingBoard()
+
   return (
     <main className={styles.page}>
-      <RankingTable rows={MOCK_RANKING} />
+      <RankingTable rows={rows} onReset={resetRanking} />
     </main>
   )
 }
