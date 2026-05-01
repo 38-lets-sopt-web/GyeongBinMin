@@ -12,5 +12,6 @@ export const colors = {
   slate900A12: 'rgba(15, 23, 42, 0.12)',
 
   red500: '#ef4444',
+  coral500: '#f88070',
   green500: '#22c55e',
 } as const
