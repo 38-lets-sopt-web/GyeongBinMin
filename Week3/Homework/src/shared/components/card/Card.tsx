@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import * as styles from './card.css'
+import * as styles from './Card.css'
 
 type CardProps = {
   children: ReactNode

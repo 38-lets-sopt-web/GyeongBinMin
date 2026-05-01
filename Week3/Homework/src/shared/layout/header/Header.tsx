@@ -1,6 +1,6 @@
 import { TABS, type TabValue } from '@/shared/constants/tab'
 
-import * as styles from './header.css'
+import * as styles from './Header.css'
 
 type HeaderProps = {
   currentTab: TabValue

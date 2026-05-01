@@ -3,8 +3,9 @@ import '../shared/styles/global.css'
 
 import { useState } from 'react'
 
-import Header from '@/shared/layout/header/Header'
 import { TABS, type TabValue } from '@/shared/constants/tab'
+
+import Header from '@/shared/layout/header/Header'
 import GamePage from '@/pages/game/GamePage'
 import RankingPage from '@/pages/ranking/RankingPage'
 
@@ -14,7 +15,7 @@ const App = () => {
   const [tab, setTab] = useState<TabValue>(TABS.GAME)
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.container}>
       <Header currentTab={tab} onTabChange={setTab} />
       {tab === TABS.GAME ? <GamePage /> : <RankingPage />}
     </div>

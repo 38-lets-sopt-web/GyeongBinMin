@@ -4,6 +4,7 @@ export const colors = {
 
   sky50: '#f0f9ff',
   sky100: '#e0f2fe',
+  sky200: '#bae6fd',
   sky500: '#0ea5e9',
   sky600: '#0284c7',
   sky700: '#0369a1',
