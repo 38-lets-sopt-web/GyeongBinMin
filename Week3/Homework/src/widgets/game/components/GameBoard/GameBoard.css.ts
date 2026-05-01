@@ -104,10 +104,49 @@ export const board = style({
 })
 
 export const hole = style({
+  position: 'relative',
   aspectRatio: '1',
   width: '100%',
   borderRadius: themeVars.radius.full,
   background: themeVars.color.sky50,
   border: `0.05rem solid ${themeVars.color.sky600}`,
   boxSizing: 'border-box',
+  padding: 0,
+  cursor: 'pointer',
+  overflow: 'hidden',
+  lineHeight: 1,
+  selectors: {
+    '&:disabled': {
+      cursor: 'default',
+      opacity: 0.85,
+    },
+  },
+})
+
+/** MoleImage · BombImage — 원형 구멍을 가득 채우고 넘치는 부분은 잘림 */
+export const moleBombImage = style({
+  position: 'absolute',
+  inset: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+  pointerEvents: 'none',
+  userSelect: 'none',
+})
+
+export const moleCell = style({
+  background: `linear-gradient(145deg, ${themeVars.color.green500}22, ${themeVars.color.sky50})`,
+})
+
+export const bombCell = style({
+  background: `linear-gradient(145deg, ${themeVars.color.red500}28, ${themeVars.color.sky50})`,
+})
+
+export const moleHitCell = style({
+  background: `linear-gradient(145deg, ${themeVars.color.coral500}44, ${themeVars.color.sky50})`,
+})
+
+export const bombHitCell = style({
+  background: `linear-gradient(145deg, ${themeVars.color.red500}55, ${themeVars.color.sky50})`,
 })
