@@ -1,5 +1,6 @@
 import { Card } from '@/shared/components/card/Card'
 import type { RankingRow } from '@/shared/types/ranking'
+import { formatDate } from '@/widgets/ranking/lib/formatDate'
 
 import * as styles from './RankingTable.css'
 
@@ -8,20 +9,6 @@ export type { RankingRow }
 type RankingTableProps = {
   rows: RankingRow[]
   onReset?: () => void
-}
-
-function formatRecordedAt(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
-  return d.toLocaleString('ko-KR', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  })
 }
 
 export function RankingTable({ rows, onReset = () => {} }: RankingTableProps) {
@@ -65,7 +52,7 @@ export function RankingTable({ rows, onReset = () => {} }: RankingTableProps) {
                     <td className={styles.td}>{row.rank}</td>
                     <td className={styles.td}>Level {row.level}</td>
                     <td className={styles.td}>{row.score}점</td>
-                    <td className={styles.td}>{formatRecordedAt(row.recordedAt)}</td>
+                    <td className={styles.td}>{formatDate(row.recordedAt)}</td>
                   </tr>
                 ))}
               </tbody>
