@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
 
 @theme inline {
   --font-heading: var(--family-heading);
@@ -92,9 +92,9 @@
   --radius-md-token: 0.5rem;
   --radius-lg-token: 0.75rem;
 
-  --family-sans: "Geist Variable", system-ui, "Segoe UI", sans-serif;
+  --family-sans: 'Geist Variable', system-ui, 'Segoe UI', sans-serif;
   --family-heading: var(--family-sans);
-  --family-mono: ui-monospace, Consolas, "Cascadia Code", monospace;
+  --family-mono: ui-monospace, Consolas, 'Cascadia Code', monospace;
 
   --font-size-caption: 0.9375rem;
   --font-size-body-sm: 1rem;
@@ -115,8 +115,7 @@
   --letter-spacing-hero: -0.03em;
 
   --shadow-token-xs: 0 1px 2px rgb(0 0 0 / 0.05);
-  --shadow-token-sm:
-    0 1px 3px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-token-sm: 0 1px 3px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.06);
   --shadow-token-md:
     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
   --shadow-token-lg:
@@ -225,4 +224,3 @@ code {
     @apply font-sans;
   }
 }
-

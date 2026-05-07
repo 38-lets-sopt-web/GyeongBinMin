@@ -1,5 +1,5 @@
-export { Button, buttonVariants } from "./button"
-export { Input } from "./input"
+export { Button, buttonVariants } from './button'
+export { Input } from './input'
 export {
   Card,
   CardHeader,
@@ -8,4 +8,4 @@ export {
   CardAction,
   CardDescription,
   CardContent,
-} from "./card"
+} from './card'
