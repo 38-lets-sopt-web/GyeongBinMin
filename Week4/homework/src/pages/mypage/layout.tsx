@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { Button } from '@/shared/ui'
 import { clearUserId, getUserId } from '@/features/auth/storage/authStorage'
-import { getUser } from '@/features/user/api/getUser'
+import { fetchUserById } from '@/features/user/api/fetchUserById'
 
 function TabLink({ to, children }: { to: string; children: React.ReactNode }) {
   return (
@@ -36,7 +36,7 @@ export function MyPageLayout() {
 
     ;(async () => {
       try {
-        const res = await getUser(userId)
+        const res = await fetchUserById(userId)
         const nextName = res.data?.name ?? ''
         if (cancelled) return
         setName(nextName)

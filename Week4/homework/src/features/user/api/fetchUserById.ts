@@ -1,12 +1,5 @@
-import { http } from '@/shared/lib/http/http'
-
-type ApiResponse<T> = {
-  success: boolean
-  status: number
-  message: string
-  code: string
-  data?: T
-}
+import { http } from '@/shared/lib/http'
+import type { ApiResponse } from '@/shared/api/apiResponse'
 
 export type User = {
   id: number
@@ -17,7 +10,7 @@ export type User = {
   part: 'iOS' | '안드로이드' | '웹'
 }
 
-export async function getUser(userId: number) {
+export async function fetchUserById(userId: number) {
   const res = await http.get<ApiResponse<User>>(`/api/v1/users/${userId}`)
   return res.data
 }

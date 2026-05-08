@@ -1,12 +1,5 @@
-import { http } from '@/shared/lib/http/http'
-
-type ApiResponse<T> = {
-  success: boolean
-  status: number
-  message: string
-  code: string
-  data?: T
-}
+import { http } from '@/shared/lib/http'
+import type { ApiResponse } from '@/shared/api/apiResponse'
 
 export type SignInRequest = {
   loginId: string

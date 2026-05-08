@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { getUserId } from '@/features/auth/storage/authStorage'
-import { getUser } from '@/features/user/api/getUser'
-import { updateUser } from '@/features/user/api/updateUser'
+import { fetchUserById } from '@/features/user/api/fetchUserById'
+import { patchUserById } from '@/features/user/api/patchUserById'
 import { Button, Card, CardContent, Input } from '@/shared/ui'
 
 export function MyInfoPage() {
@@ -29,7 +29,7 @@ export function MyInfoPage() {
       }
 
       try {
-        const res = await getUser(userId)
+        const res = await fetchUserById(userId)
         const u = res.data
         if (!u) throw new Error('No user data')
         if (cancelled) return
@@ -141,7 +141,7 @@ export function MyInfoPage() {
             if (!canSubmit) return
             try {
               setPending(true)
-              await updateUser(userId!, {
+              await patchUserById(userId!, {
                 name: form.name.trim(),
                 email: form.email.trim(),
                 age: Number(form.age),
