@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { getUserId } from '@/features/auth/storage/authStorage'
 import { fetchUserById } from '@/features/user/api/fetchUserById'
 import { patchUserById } from '@/features/user/api/patchUserById'
+import { getHttpErrorMessage } from '@/shared/lib/http/httpError'
 import { Button, Card, CardContent, Input } from '@/shared/ui'
 
 export function MyInfoPage() {
@@ -147,8 +148,8 @@ export function MyInfoPage() {
                 age: Number(form.age),
               })
               alert('저장에 성공했습니다.')
-            } catch {
-              alert('저장에 실패했습니다.')
+            } catch (e) {
+              alert(getHttpErrorMessage(e, '저장에 실패했습니다.'))
             } finally {
               setPending(false)
             }

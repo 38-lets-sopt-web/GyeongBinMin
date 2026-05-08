@@ -14,6 +14,7 @@ import {
 import { useSignInForm } from '@/features/auth/hooks/useSignInForm'
 import { validateSignInInput } from '@/features/auth/lib/validateSignIn'
 import { signInUsecase } from '@/features/auth/usecase/signInUsecase'
+import { getHttpErrorMessage } from '@/shared/lib/http/httpError'
 
 export function LoginPage() {
   const navigate = useNavigate()
@@ -43,8 +44,10 @@ export function LoginPage() {
       }
 
       navigate('/mypage')
-    } catch {
-      alert('존재하지 않는 아이디거나 비밀번호가 일치하지 않습니다.')
+    } catch (e) {
+      alert(
+        getHttpErrorMessage(e, '존재하지 않는 아이디거나 비밀번호가 일치하지 않습니다.'),
+      )
     } finally {
       setPending(false)
     }

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { getUserId } from '@/features/auth/storage/authStorage'
 import { fetchUserById } from '@/features/user/api/fetchUserById'
 import { fetchUserList, type UserSummary } from '@/features/user/api/fetchUserList'
+import { getHttpErrorMessage } from '@/shared/lib/http/httpError'
 import { Button, Card, CardContent, Input } from '@/shared/ui'
 import { MemberCard } from '@/pages/mypage/members/MemberCard'
 
@@ -51,7 +52,7 @@ export function MemberPage() {
 
           const meSummary: UserSummary = { id: u.id, name: u.name, part: u.part }
           setUsers([meSummary, ...list])
-        } catch {
+        } catch (e) {
           if (cancelled) return
           setUsers(list)
         }
@@ -94,8 +95,8 @@ export function MemberPage() {
               const u = res.data
               if (!u) throw new Error('No user data')
               setSearchedUser(u)
-            } catch {
-              alert('조회에 실패했습니다.')
+            } catch (e) {
+              alert(getHttpErrorMessage(e, '조회에 실패했습니다.'))
               setSearchedUser(null)
             } finally {
               setPending(false)

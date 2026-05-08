@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui'
 import { useSignupSteps } from '@/features/signup/hooks/useSignupSteps'
 import { signUp } from '@/features/signup/api/signUp'
+import { getHttpErrorMessage } from '@/shared/lib/http/httpError'
 import { SignupStepId } from '@/pages/signup/components/SignupStepId'
 import { SignupStepPassword } from '@/pages/signup/components/SignupStepPassword'
 import { SignupStepProfile } from '@/pages/signup/components/SignupStepProfile'
@@ -91,8 +92,8 @@ export function SignupPage() {
                   await signUp(values)
                   alert(`${values.name}님 회원가입에 성공했습니다.`)
                   navigate('/login')
-                } catch {
-                  alert('회원가입에 실패했습니다.')
+                } catch (e) {
+                  alert(getHttpErrorMessage(e, '회원가입에 실패했습니다.'))
                 } finally {
                   setPending(false)
                 }
