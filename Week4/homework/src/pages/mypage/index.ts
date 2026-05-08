@@ -1,5 +1,5 @@
 export { MyPageLayout } from './layout'
-export { MyInfoPage } from './info/page'
-export { MemberPage } from './members/page'
-export { MemberDetailPage } from './members/detail'
+export { MyInfoPage } from './info/MyInfoPage'
+export { MemberPage } from './members/MemberPage'
+export { MemberDetailPage } from './members/MemberDetailPage'
 

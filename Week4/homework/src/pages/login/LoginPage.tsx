@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import {
@@ -11,16 +11,49 @@ import {
   Input,
   PasswordInput,
 } from '@/shared/ui'
-import { signIn } from '@/features/auth/api/signIn'
-import { setUserId } from '@/features/auth/storage/authStorage'
 import { useSignInForm } from '@/features/auth/hooks/useSignInForm'
+import { validateSignInInput } from '@/features/auth/lib/validateSignIn'
+import { signInUsecase } from '@/features/auth/usecase/signInUsecase'
 
 export function LoginPage() {
   const navigate = useNavigate()
-  const { values, setValues, canSubmit } = useSignInForm()
+  const { values, setValues } = useSignInForm()
   const [pending, setPending] = useState(false)
 
-  const disabled = useMemo(() => pending || !canSubmit, [canSubmit, pending])
+  const disabled = pending
+
+  const handleLogin = useCallback(async () => {
+    if (disabled) return
+    const v = validateSignInInput(values)
+    if (!v.ok) {
+      alert(v.message)
+      return
+    }
+
+    try {
+      setPending(true)
+      const res = await signInUsecase({
+        loginId: values.loginId,
+        password: values.password,
+      })
+
+      if (!res.ok) {
+        alert('로그인에 실패했습니다.')
+        return
+      }
+
+      navigate('/mypage')
+    } catch {
+      alert('존재하지 않는 아이디거나 비밀번호가 일치하지 않습니다.')
+    } finally {
+      setPending(false)
+    }
+  }, [
+    disabled,
+    navigate,
+    values.loginId,
+    values.password,
+  ])
 
   return (
     <div className="flex flex-1 items-center justify-center">
@@ -50,29 +83,7 @@ export function LoginPage() {
           <Button
             className="w-full cursor-pointer hover:bg-primary/90 disabled:cursor-not-allowed"
             disabled={disabled}
-            onClick={async () => {
-              if (disabled) return
-              try {
-                setPending(true)
-                const res = await signIn({
-                  loginId: values.loginId,
-                  password: values.password,
-                })
-
-                const userId = res.data?.userId
-                if (typeof userId !== 'number') {
-                  alert('로그인에 실패했습니다.')
-                  return
-                }
-
-                setUserId(userId)
-                navigate('/mypage')
-              } catch {
-                alert('존재하지 않는 아이디거나 비밀번호가 일치하지 않습니다.')
-              } finally {
-                setPending(false)
-              }
-            }}
+            onClick={handleLogin}
           >
             로그인
           </Button>
