@@ -1,11 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useMemo, useState } from 'react'
 
-import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle, Input, PasswordInput } from '@/shared/ui'
-import { useSignupForm } from '@/features/signup/hooks/useSignupForm'
+import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui'
+import { useSignupSteps } from '@/features/signup/hooks/useSignupSteps'
+import { signUp } from '@/features/signup/api/signUp'
+import { SignupStepId } from '@/pages/signup/components/SignupStepId'
+import { SignupStepPassword } from '@/pages/signup/components/SignupStepPassword'
+import { SignupStepProfile } from '@/pages/signup/components/SignupStepProfile'
 
 export function SignupPage() {
-  const { values, setValues, canSubmit } = useSignupForm()
+  const { step, values, setValues, next, back, canNextFromId, canNextFromPassword, canSubmit } =
+    useSignupSteps()
   const navigate = useNavigate()
+  const [pending, setPending] = useState(false)
+
+  const primaryDisabled = useMemo(() => {
+    if (pending) return true
+    if (step === 'id') return !canNextFromId
+    if (step === 'password') return !canNextFromPassword
+    return !canSubmit
+  }, [canNextFromId, canNextFromPassword, canSubmit, pending, step])
 
   return (
     <div className="w-full bg-muted/40 py-12">
@@ -14,104 +28,79 @@ export function SignupPage() {
           <CardTitle className="text-hero-sm font-heading font-semibold">회원가입</CardTitle>
       </CardHeader>
         <CardContent className="grid gap-6 text-left">
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-userId">
-              아이디
-            </label>
-            <Input
-              id="signup-userId"
-              value={values.userId}
-              onChange={(e) => setValues((prev) => ({ ...prev, userId: e.target.value }))}
-              placeholder="아이디를 입력해주세요."
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-password">
-              비밀번호
-            </label>
-            <PasswordInput
-              id="signup-password"
-              value={values.password}
-              onChange={(e) => setValues((prev) => ({ ...prev, password: e.target.value }))}
-              placeholder="비밀번호를 입력해주세요."
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-passwordConfirm">
-              비밀번호 확인
-            </label>
-            <PasswordInput
-              id="signup-passwordConfirm"
-              value={values.passwordConfirm}
-              onChange={(e) =>
-                setValues((prev) => ({ ...prev, passwordConfirm: e.target.value }))
+          {step === 'id' && (
+            <SignupStepId
+              value={values.loginId}
+              onChange={(nextValue) =>
+                setValues((prev) => ({ ...prev, loginId: nextValue }))
               }
-              placeholder="비밀번호를 다시 입력해주세요."
             />
-          </div>
+          )}
 
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-name">
-              이름
-            </label>
-            <Input
-              id="signup-name"
-              value={values.name}
-              onChange={(e) => setValues((prev) => ({ ...prev, name: e.target.value }))}
-              placeholder="이름을 입력해주세요."
+          {step === 'password' && (
+            <SignupStepPassword
+              password={values.password}
+              passwordConfirm={values.passwordConfirm}
+              onChangePassword={(nextValue) =>
+                setValues((prev) => ({ ...prev, password: nextValue }))
+              }
+              onChangePasswordConfirm={(nextValue) =>
+                setValues((prev) => ({ ...prev, passwordConfirm: nextValue }))
+              }
             />
-          </div>
+          )}
 
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-email">
-              이메일
-            </label>
-            <Input
-              id="signup-email"
-              value={values.email}
-              onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
-              placeholder="이메일을 입력해주세요."
+          {step === 'profile' && (
+            <SignupStepProfile
+              values={{
+                name: values.name,
+                email: values.email,
+                age: values.age,
+                part: values.part,
+              }}
+              onChange={(key, nextValue) =>
+                setValues((prev) => ({ ...prev, [key]: nextValue }))
+              }
             />
-          </div>
-
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-age">
-              나이
-            </label>
-            <Input
-              id="signup-age"
-              value={values.age}
-              onChange={(e) => setValues((prev) => ({ ...prev, age: e.target.value }))}
-              placeholder="나이를 입력해주세요."
-              inputMode="numeric"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <label className="text-sm font-medium" htmlFor="signup-part">
-              파트
-            </label>
-            <Input
-              id="signup-part"
-              value={values.part}
-              onChange={(e) => setValues((prev) => ({ ...prev, part: e.target.value }))}
-              placeholder="파트명을 입력해주세요."
-            />
-          </div>
+          )}
       </CardContent>
         <CardFooter className="flex flex-col gap-3">
-          <Button
-            className="w-full cursor-pointer hover:bg-primary/90 disabled:cursor-not-allowed"
-            disabled={!canSubmit}
-            onClick={() => {
-              if (!canSubmit) return
-              navigate('/login')
-            }}
-          >
-            회원가입
-          </Button>
+          <div className="flex w-full gap-2">
+            {step !== 'id' && (
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => back()}
+              >
+                이전
+              </Button>
+            )}
+            <Button
+              className="flex-1 cursor-pointer hover:bg-primary/90 disabled:cursor-not-allowed"
+              disabled={primaryDisabled}
+              onClick={async () => {
+                if (primaryDisabled) return
+
+                if (step !== 'profile') {
+                  next()
+                  return
+                }
+
+                try {
+                  setPending(true)
+                  await signUp(values)
+                  alert(`${values.name}님 회원가입에 성공했습니다.`)
+                  navigate('/login')
+                } catch {
+                  alert('회원가입에 실패했습니다.')
+                } finally {
+                  setPending(false)
+                }
+              }}
+            >
+              {step === 'profile' ? '회원가입' : '다음'}
+            </Button>
+          </div>
           <div className="text-sm text-muted-foreground">
             이미 계정이 있나요?{' '}
             <Link className="text-primary underline underline-offset-4" to="/login">
