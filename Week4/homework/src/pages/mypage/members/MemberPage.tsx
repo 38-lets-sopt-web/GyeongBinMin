@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { getUserId } from '@/features/auth/storage/authStorage'
 import { fetchUserById } from '@/features/user/api/fetchUserById'
 import { fetchUserList, type UserSummary } from '@/features/user/api/fetchUserList'
 import { Button, Card, CardContent, Input } from '@/shared/ui'
+import { MemberCard } from '@/pages/mypage/members/MemberCard'
 
 export function MemberPage() {
   const navigate = useNavigate()
@@ -29,7 +31,30 @@ export function MemberPage() {
         const res = await fetchUserList()
         const list = res.data?.users ?? []
         if (cancelled) return
-        setUsers(list)
+
+        const myId = getUserId()
+        if (!myId) {
+          setUsers(list)
+          return
+        }
+
+        if (list.some((u) => u.id === myId)) {
+          setUsers(list)
+          return
+        }
+
+        try {
+          const me = await fetchUserById(myId)
+          const u = me.data
+          if (!u) throw new Error('No user data')
+          if (cancelled) return
+
+          const meSummary: UserSummary = { id: u.id, name: u.name, part: u.part }
+          setUsers([meSummary, ...list])
+        } catch {
+          if (cancelled) return
+          setUsers(list)
+        }
       } catch {
         if (cancelled) return
         setUsers([])
@@ -50,7 +75,7 @@ export function MemberPage() {
         <Input
           id="member-id"
           value={memberId}
-          onChange={(e) => setMemberId(e.target.value)}
+          onChange={(e) => setMemberId(e.target.value.replace(/[^\d]/g, ''))}
           placeholder="ID를 입력해주세요"
           inputMode="numeric"
         />
@@ -80,28 +105,14 @@ export function MemberPage() {
           검색
         </Button>
 
-        <div className="mt-10 text-sm font-semibold">전체 멤버 리스트</div>
-        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {users.map((u) => (
-            <Card key={u.id} className="cursor-pointer hover:bg-muted/30">
-              <button
-                type="button"
-                className="w-full cursor-pointer rounded-lg p-4 text-left"
-                onClick={() => navigate(`/mypage/members/${u.id}`)}
-              >
-                <div className="text-sm font-semibold text-foreground">{u.name}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{u.part}</div>
-              </button>
-            </Card>
-          ))}
-        </div>
-
         <div className="mt-10 text-sm font-semibold">검색 결과</div>
 
         <Card className="mt-3">
-          <CardContent className="flex min-h-40 items-center justify-center text-sm text-muted-foreground">
+          <CardContent className="min-h-40 p-0">
             {searchedUser === null ? (
-              <span>원하는 ID를 검색해 보세요!</span>
+              <div className="flex min-h-40 items-center justify-center p-6 text-sm text-muted-foreground">
+                원하는 ID를 검색해 보세요!
+              </div>
             ) : (
               <button
                 type="button"
@@ -111,13 +122,38 @@ export function MemberPage() {
                 <div className="text-sm font-semibold text-foreground">
                   {searchedUser.name} (#{searchedUser.id})
                 </div>
-                <div className="mt-1 text-sm text-muted-foreground">
-                  {searchedUser.part} · 클릭해서 상세 정보 보기
+                <div className="mt-1 text-sm text-muted-foreground">{searchedUser.part}</div>
+
+                <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                  <div className="text-muted-foreground">아이디</div>
+                  <div className="text-right">{searchedUser.loginId}</div>
+
+                  <div className="text-muted-foreground">이메일</div>
+                  <div className="text-right">{searchedUser.email}</div>
+
+                  <div className="text-muted-foreground">나이</div>
+                  <div className="text-right">{searchedUser.age}세</div>
+                </div>
+
+                <div className="mt-4 text-sm text-primary underline underline-offset-4">
+                  상세 페이지로 이동
                 </div>
               </button>
             )}
           </CardContent>
         </Card>
+
+        <div className="mt-10 text-sm font-semibold">전체 멤버 리스트</div>
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {users.map((u) => (
+            <MemberCard
+              key={u.id}
+              name={u.name}
+              part={u.part}
+              onClick={() => navigate(`/mypage/members/${u.id}`)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
