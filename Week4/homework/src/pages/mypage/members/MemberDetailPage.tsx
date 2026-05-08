@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button, Card, CardContent, CardTitle } from '@/shared/ui'
-import type { Member } from '@/features/member/types/member.type'
+import type { Member } from '@/features/member/types/memberType'
 
 const MOCK_MEMBER: Member = {
   id: 1,
