@@ -20,4 +20,3 @@ export {
   navigationMenuTriggerStyle,
   NavigationMenuViewport,
 } from './navigation-menu'
-export { Separator } from './separator'
