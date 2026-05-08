@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { type ReactNode, useEffect } from 'react'
 
 import { AppThemeProvider } from '@/shared/theme/theme-context'
 import { theme } from '@/shared/theme/tokens'
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = document.documentElement
 
