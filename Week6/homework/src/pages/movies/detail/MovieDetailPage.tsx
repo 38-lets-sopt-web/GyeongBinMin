@@ -46,7 +46,7 @@ export function MovieDetailPage() {
 
               <div className={styles.bottomGrid}>
                 <DetailBasicsSection movie={movie} />
-                <DetailRatingSection />
+                <DetailRatingSection movieId={movie.id} />
               </div>
             </>
           )}

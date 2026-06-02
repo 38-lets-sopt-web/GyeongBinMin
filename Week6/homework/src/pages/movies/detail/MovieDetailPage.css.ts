@@ -285,6 +285,18 @@ export const buttonRow = style({
   flexWrap: 'wrap',
 })
 
+export const ratingMessage = style({
+  marginTop: '0.75rem',
+  fontSize: '0.875rem',
+  color: '#111827',
+})
+
+export const ratingError = style({
+  marginTop: '0.75rem',
+  fontSize: '0.875rem',
+  color: '#dc2626',
+})
+
 export const primaryButton = style({
   height: '2.5rem',
   padding: '0 0.875rem',
