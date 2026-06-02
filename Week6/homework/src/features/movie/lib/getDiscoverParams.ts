@@ -5,6 +5,7 @@ type DiscoverParams = {
   language: string
   api_key: string
   'vote_average.gte'?: number
+  'vote_average.lte'?: number
 }
 
 export function getDiscoverParams(
@@ -18,7 +19,9 @@ export function getDiscoverParams(
   }
 
   if (ratingFilter !== 'all') {
-    params['vote_average.gte'] = Number(ratingFilter)
+    const bucket = Number(ratingFilter)
+    params['vote_average.gte'] = bucket
+    params['vote_average.lte'] = bucket === 10 ? 10 : bucket + 0.999
   }
 
   return params
