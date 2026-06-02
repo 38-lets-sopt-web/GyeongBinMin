@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
+import { RouterProvider } from 'react-router-dom'
 
-import { root } from '@/app/layouts/rootLayout.css.ts'
+import { router } from '@/app/router'
 import { QueryProvider, ThemeProvider } from '@/app/providers'
 import '@/shared/style/reset.css.ts'
 import '@/shared/style/global.css.ts'
@@ -10,7 +11,7 @@ function App() {
     <StrictMode>
       <ThemeProvider>
         <QueryProvider>
-          <main className={root}>Week6 Movie App</main>
+          <RouterProvider router={router} />
         </QueryProvider>
       </ThemeProvider>
     </StrictMode>
