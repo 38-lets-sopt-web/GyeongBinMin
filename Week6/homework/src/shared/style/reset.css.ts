@@ -13,11 +13,13 @@ globalStyle('html', {
   WebkitTextSizeAdjust: '100%',
   MozTextSizeAdjust: '100%',
   textSizeAdjust: '100%',
+  overflowX: 'hidden',
 })
 
 globalStyle('body', {
   minHeight: '100vh',
   lineHeight: 1.5,
+  overflowX: 'hidden',
 })
 
 globalStyle('img, picture, video, canvas, svg', {
@@ -57,4 +59,5 @@ globalStyle('p, h1, h2, h3, h4, h5, h6', {
 globalStyle('#root', {
   isolation: 'isolate',
   minHeight: '100vh',
+  overflowX: 'hidden',
 })
