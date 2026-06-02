@@ -36,8 +36,8 @@ export const poster = style({
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
-  padding: '16px',
+  gap: '0.5rem',
+  padding: '1rem',
   flex: 1,
 })
 

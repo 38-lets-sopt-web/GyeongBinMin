@@ -4,16 +4,16 @@ export const page = style({
   minHeight: '100vh',
   backgroundColor: '#f8f9fb',
   color: '#111827',
-  padding: '48px 24px 96px',
+  padding: '3rem 1.5rem 6rem',
 })
 
 export const container = style({
-  maxWidth: '1200px',
+  maxWidth: '75rem',
   margin: '0 auto',
 })
 
 export const title = style({
-  margin: '0 0 32px',
+  margin: '0 0 2rem',
   textAlign: 'center',
   fontSize: 'clamp(2rem, 4vw, 2.75rem)',
   fontWeight: 700,
@@ -23,12 +23,12 @@ export const title = style({
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-  gap: '24px',
+  gap: '1.5rem',
   '@media': {
-    'screen and (max-width: 1024px)': {
+    'screen and (max-width: 64rem)': {
       gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     },
-    'screen and (max-width: 560px)': {
+    'screen and (max-width: 35rem)': {
       gridTemplateColumns: '1fr',
     },
   },
@@ -36,18 +36,18 @@ export const grid = style({
 
 export const sentinel = style({
   height: '1px',
-  marginTop: '48px',
+  marginTop: '3rem',
 })
 
 export const loadStatus = style({
-  marginTop: '24px',
+  marginTop: '1.5rem',
   textAlign: 'center',
   fontSize: '0.875rem',
   color: '#6b7280',
 })
 
 export const errorStatus = style({
-  marginTop: '24px',
+  marginTop: '1.5rem',
   textAlign: 'center',
   fontSize: '0.875rem',
   color: '#dc2626',
