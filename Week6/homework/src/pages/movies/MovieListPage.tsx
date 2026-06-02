@@ -1,66 +1,47 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { mockMovies } from '@/pages/movies/data/mockMovies'
-import type { MovieListItem } from '@/pages/movies/model/movieListItem'
+import { useDiscoverMovies } from '@/features/movie/hooks/useDiscoverMovies'
 import * as styles from '@/pages/movies/MovieListPage.css.ts'
 import { MovieCard } from '@/pages/movies/ui/MovieCard'
 import {
   RatingFilter,
   type RatingFilterValue,
 } from '@/pages/movies/ui/RatingFilter'
-
-const PAGE_SIZE = 8
-
-function filterByRating(
-  movies: MovieListItem[],
-  rating: RatingFilterValue,
-): MovieListItem[] {
-  if (rating === 'all') return movies
-  const minScore = Number(rating)
-  return movies.filter((movie) => movie.voteAverage >= minScore)
-}
+import { getHttpErrorMessage } from '@/shared/lib/http/httpError'
 
 export function MovieListPage() {
   const [ratingFilter, setRatingFilter] = useState<RatingFilterValue>('all')
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
   const sentinelRef = useRef<HTMLDivElement>(null)
 
-  const filteredMovies = useMemo(
-    () => filterByRating(mockMovies, ratingFilter),
-    [ratingFilter],
+  const {
+    data,
+    error,
+    isPending,
+    isError,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useDiscoverMovies(ratingFilter)
+
+  const movies = useMemo(
+    () => data?.pages.flatMap((page) => page.movies) ?? [],
+    [data],
   )
-
-  const visibleMovies = useMemo(
-    () => filteredMovies.slice(0, visibleCount),
-    [filteredMovies, visibleCount],
-  )
-
-  const hasMore = visibleCount < filteredMovies.length
-
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE)
-  }, [ratingFilter])
-
-  const loadMore = useCallback(() => {
-    setVisibleCount((prev) =>
-      Math.min(prev + PAGE_SIZE, filteredMovies.length),
-    )
-  }, [filteredMovies.length])
 
   useEffect(() => {
     const sentinel = sentinelRef.current
-    if (!sentinel || !hasMore) return
+    if (!sentinel || !hasNextPage || isFetchingNextPage) return
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0]?.isIntersecting) loadMore()
+        if (entries[0]?.isIntersecting) fetchNextPage()
       },
       { rootMargin: '120px' },
     )
 
     observer.observe(sentinel)
     return () => observer.disconnect()
-  }, [hasMore, loadMore])
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage])
 
   return (
     <div className={styles.page}>
@@ -69,19 +50,36 @@ export function MovieListPage() {
 
         <RatingFilter value={ratingFilter} onChange={setRatingFilter} />
 
-        <div className={styles.grid}>
-          {visibleMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </div>
+        {isPending && (
+          <p className={styles.loadStatus}>영화 목록을 불러오는 중…</p>
+        )}
 
-        {filteredMovies.length === 0 && (
+        {isError && (
+          <p className={styles.errorStatus} role="alert">
+            {getHttpErrorMessage(
+              error,
+              '영화 목록을 불러오지 못했습니다. API 키와 네트워크를 확인해 주세요.',
+            )}
+          </p>
+        )}
+
+        {!isPending && !isError && (
+          <div className={styles.grid}>
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </div>
+        )}
+
+        {!isPending && !isError && movies.length === 0 && (
           <p className={styles.loadStatus}>조건에 맞는 영화가 없습니다.</p>
         )}
 
-        {hasMore && <div ref={sentinelRef} className={styles.sentinel} />}
+        {hasNextPage && !isError && (
+          <div ref={sentinelRef} className={styles.sentinel} />
+        )}
 
-        {hasMore && (
+        {isFetchingNextPage && (
           <p className={styles.loadStatus} aria-live="polite">
             더 불러오는 중…
           </p>
