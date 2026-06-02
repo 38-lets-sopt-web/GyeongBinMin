@@ -6,6 +6,10 @@ import {
   useDeleteMovieRating,
   useSaveMovieRating,
 } from '@/features/rating/hooks/useMovieRatingMutations'
+import { Button } from '@/shared/ui/button/Button'
+import { Card } from '@/shared/ui/card/Card'
+import { Input } from '@/shared/ui/input/Input'
+import { SectionTitle } from '@/shared/ui/typography/SectionTitle'
 
 function parseRating(value: string): number | null {
   const n = Number(value)
@@ -71,49 +75,51 @@ export function DetailRatingSection({ movieId }: DetailRatingSectionProps) {
   }
 
   return (
-    <section className={styles.panel} aria-label="별점 남기기">
-      <h2 className={styles.sectionTitle}>별점 남기기</h2>
-      <p className={styles.ratingHelp}>0.5 ~ 10.0</p>
-      <input
-        className={styles.ratingInput}
-        type="number"
-        inputMode="decimal"
-        min={0.5}
-        max={10}
-        step={0.5}
-        placeholder="예: 7.5"
-        aria-label="별점 입력"
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value)
-          setMessage(null)
-          setError(null)
-        }}
-        disabled={isPending || saveMutation.isPending || deleteMutation.isPending}
-      />
-      <div className={styles.buttonRow}>
-        <button
-          className={styles.primaryButton}
-          type="button"
-          onClick={onSave}
-          disabled={!canSave || saveMutation.isPending || deleteMutation.isPending}
-        >
-          별점 저장
-        </button>
-        <button
-          className={styles.ghostButton}
-          type="button"
-          onClick={onDelete}
-          disabled={saveMutation.isPending || deleteMutation.isPending}
-        >
-          별점 삭제하기
-        </button>
-      </div>
+    <section aria-label="별점 남기기">
+      <Card padded>
+        <SectionTitle>별점 남기기</SectionTitle>
+        <p className={styles.ratingHelp}>0.5 ~ 10.0</p>
+        <Input
+          type="number"
+          inputMode="decimal"
+          min={0.5}
+          max={10}
+          step={0.5}
+          placeholder="예: 7.5"
+          aria-label="별점 입력"
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value)
+            setMessage(null)
+            setError(null)
+          }}
+          disabled={isPending || saveMutation.isPending || deleteMutation.isPending}
+        />
+        <div className={styles.buttonRow}>
+          <Button
+            type="button"
+            onClick={onSave}
+            disabled={
+              !canSave || saveMutation.isPending || deleteMutation.isPending
+            }
+          >
+            별점 저장
+          </Button>
+          <Button
+            variant="ghost"
+            type="button"
+            onClick={onDelete}
+            disabled={saveMutation.isPending || deleteMutation.isPending}
+          >
+            별점 삭제하기
+          </Button>
+        </div>
 
-      {(error ?? validationError) && (
-        <p className={styles.ratingError}>{error ?? validationError}</p>
-      )}
-      {message && <p className={styles.ratingMessage}>{message}</p>}
+        {(error ?? validationError) && (
+          <p className={styles.ratingError}>{error ?? validationError}</p>
+        )}
+        {message && <p className={styles.ratingMessage}>{message}</p>}
+      </Card>
     </section>
   )
 }
